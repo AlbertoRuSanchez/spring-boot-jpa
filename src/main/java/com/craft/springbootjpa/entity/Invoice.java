@@ -20,6 +20,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -62,7 +63,7 @@ public class Invoice {
             joinColumns = @JoinColumn(name = "invoice_id"),
             inverseJoinColumns = @JoinColumn(name = "product_id")
     )
-    private Set<Product> products;
+    private Set<Product> products = new HashSet<>();
 
     public Invoice(Customer customer, LocalDateTime createdAt, Double amount) {
         this.customer = customer;
