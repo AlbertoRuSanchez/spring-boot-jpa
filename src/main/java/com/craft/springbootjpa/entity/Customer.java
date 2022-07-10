@@ -3,6 +3,7 @@ package com.craft.springbootjpa.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -21,6 +22,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @NoArgsConstructor
+@ToString
 public class Customer {
     @Id
     @SequenceGenerator(
@@ -45,4 +47,10 @@ public class Customer {
     @OneToOne (mappedBy = "customer", orphanRemoval = true, cascade = CascadeType.ALL)
     private UserAccount userAccount;
 
+    public Customer(String fistName, String lastName, String email, LocalDate birthDate) {
+        this.fistName = fistName;
+        this.lastName = lastName;
+        this.email = email;
+        this.birthDate = birthDate;
+    }
 }

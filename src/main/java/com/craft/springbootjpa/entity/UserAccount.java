@@ -3,6 +3,7 @@ package com.craft.springbootjpa.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -20,6 +21,7 @@ import javax.persistence.Table;
 @Getter
 @Setter
 @NoArgsConstructor
+@ToString
 public class UserAccount {
 
     @Id
@@ -42,10 +44,14 @@ public class UserAccount {
 
     @OneToOne (cascade = CascadeType.ALL)
     @JoinColumn (name = "customer_id", referencedColumnName = "id")
+    @ToString.Exclude
     private Customer customer;
 
-    public UserAccount(String userName, String password) {
+    public UserAccount(String userName, String password, Boolean isActive) {
         this.userName = userName;
         this.password = password;
+        this.isActive = isActive;
     }
+
+
 }
