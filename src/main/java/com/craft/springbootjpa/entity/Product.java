@@ -35,7 +35,7 @@ public class Product {
     @Column(name = "price")
     private Double price;
 
-    @ManyToMany(mappedBy = "products", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "products", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @ToString.Exclude
     private Set<Invoice> invoice = new HashSet<>();
 

@@ -12,14 +12,15 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity(name = "Customer")
 @Table(name = "customer")
@@ -51,8 +52,15 @@ public class Customer {
     @OneToOne (mappedBy = "customer", orphanRemoval = true, cascade = CascadeType.ALL)
     private UserAccount userAccount;
 
-    @OneToMany (mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany (
+            mappedBy = "customer",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true,
+            fetch = FetchType.EAGER)
     private List<Invoice> invoices = new ArrayList<>();
+
+    @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER)
+    private Set<CustomerPromotion> customerPromotions = new HashSet<>();
 
     public Customer(String fistName, String lastName, String email, LocalDate birthDate) {
         this.fistName = fistName;

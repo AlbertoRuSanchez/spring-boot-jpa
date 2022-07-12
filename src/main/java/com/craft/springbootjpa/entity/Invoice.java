@@ -57,7 +57,7 @@ public class Invoice {
     @Column(name = "amount")
     private Double amount;
 
-    @ManyToMany (fetch = FetchType.EAGER)
+    @ManyToMany (fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinTable(
             name = "invoice_product",
             joinColumns = @JoinColumn(name = "invoice_id"),
