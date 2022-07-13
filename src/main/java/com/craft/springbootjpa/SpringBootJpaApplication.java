@@ -94,61 +94,61 @@ public class SpringBootJpaApplication {
             /**
              * Adding an account with OneToOne relationship
              */
-//            UserAccount userAccount = new UserAccount(customer.getEmail(), faker.random().hex(8), Boolean.TRUE);
-//            userAccount.setCustomer(customer);
-//            customer.setUserAccount(userAccount);
-//            customerRepository.save(customer);
-//
-//
-//            /**
-//             * Adding several invoices to a customer with OneToMany relationship
-//             *
-//             * At the same time, we add on cascade, the invoices lines in a ManyToMany direct relationship with products
-//             */
-//            Invoice invoice = new Invoice(customer, LocalDateTime.now(), 566.0);
-//            invoice.setProducts(products.subList(0, 5).stream().collect(Collectors.toSet()));
-//            Invoice invoiceTwo = new Invoice(customer, LocalDateTime.now(), 888.3);
-//            invoiceTwo.setProducts(products.subList(6, 10).stream().collect(Collectors.toSet()));
-//            invoiceRepository.saveAll(List.of(invoice, invoiceTwo));
-//            customer.setInvoices(List.of(invoice, invoiceTwo));
-//            customerRepository.save(customer);
-//
-//            /**
-//             * Adding several promotions.
-//             *
-//             * Promotion is the parent Entity. We create a Promotion, set list of PromotionCodes and List of CustomerPromotions
-//             *
-//             * Just save the promotion, JPA will persist the child entities by cascade.
-//             *
-//             */
-//            Promotion promotionOne = new Promotion("Spring promo" , LocalDate.now(),
-//                    LocalDate.now().plusMonths(5));
-//
-//            Promotion promotionTwo = new Promotion("Winter promo" , LocalDate.now(),
-//                    LocalDate.now().plusMonths(2));
-//
-//            //create the codes
-//            Set<PromotionCode> promotionCodesOne = new HashSet<>();
-//            Set<PromotionCode> promotionCodesTwo = new HashSet<>();
-//            for (int i = 0; i < 20; i++) {
-//                promotionCodesOne.add(new PromotionCode(faker.commerce().promotionCode()));
-//                promotionCodesTwo.add(new PromotionCode(faker.commerce().promotionCode()));
-//            }
-//            promotionOne.setPromotionCodes(promotionCodesOne);
-//            promotionTwo.setPromotionCodes(promotionCodesTwo);
-//            promotionRepository.saveAll(List.of(promotionOne, promotionTwo));
-//
-//            //assign the lucky customers to the promotion
-//            Set<CustomerPromotion> customerPromotions = new HashSet<>();
-//            customers.subList(0,5).forEach(c -> {
-//                customerPromotions.add(new CustomerPromotion(new CustomerPromotionId(c.getId(), promotionOne.getId()), c, promotionOne));
-//                customerPromotions.add(new CustomerPromotion(new CustomerPromotionId(c.getId(), promotionTwo.getId()), c, promotionTwo));
-//            });
-//            promotionOne.setCustomerPromotions(customerPromotions);
-//            promotionRepository.saveAll(List.of(promotionOne, promotionTwo));
-//
-//
-//            customerRepository.findAll().forEach(c -> System.out.println(c));
+            UserAccount userAccount = new UserAccount(customer.getEmail(), faker.random().hex(8), Boolean.TRUE);
+            userAccount.setCustomer(customer);
+            customer.setUserAccount(userAccount);
+            customerRepository.save(customer);
+
+
+            /**
+             * Adding several invoices to a customer with OneToMany relationship
+             *
+             * At the same time, we add on cascade, the invoices lines in a ManyToMany direct relationship with products
+             */
+            Invoice invoice = new Invoice(customer, LocalDateTime.now(), 566.0);
+            invoice.setProducts(products.subList(0, 5).stream().collect(Collectors.toSet()));
+            Invoice invoiceTwo = new Invoice(customer, LocalDateTime.now(), 888.3);
+            invoiceTwo.setProducts(products.subList(6, 10).stream().collect(Collectors.toSet()));
+            invoiceRepository.saveAll(List.of(invoice, invoiceTwo));
+            customer.setInvoices(List.of(invoice, invoiceTwo));
+            customerRepository.save(customer);
+
+            /**
+             * Adding several promotions.
+             *
+             * Promotion is the parent Entity. We create a Promotion, set list of PromotionCodes and List of CustomerPromotions
+             *
+             * Just save the promotion, JPA will persist the child entities by cascade.
+             *
+             */
+            Promotion promotionOne = new Promotion("Spring promo" , LocalDate.now(),
+                    LocalDate.now().plusMonths(5));
+
+            Promotion promotionTwo = new Promotion("Winter promo" , LocalDate.now(),
+                    LocalDate.now().plusMonths(2));
+
+            //create the codes
+            Set<PromotionCode> promotionCodesOne = new HashSet<>();
+            Set<PromotionCode> promotionCodesTwo = new HashSet<>();
+            for (int i = 0; i < 20; i++) {
+                promotionCodesOne.add(new PromotionCode(faker.commerce().promotionCode()));
+                promotionCodesTwo.add(new PromotionCode(faker.commerce().promotionCode()));
+            }
+            promotionOne.setPromotionCodes(promotionCodesOne);
+            promotionTwo.setPromotionCodes(promotionCodesTwo);
+            promotionRepository.saveAll(List.of(promotionOne, promotionTwo));
+
+            //assign the lucky customers to the promotion
+            Set<CustomerPromotion> customerPromotions = new HashSet<>();
+            customers.subList(0,5).forEach(c -> {
+                customerPromotions.add(new CustomerPromotion(new CustomerPromotionId(c.getId(), promotionOne.getId()), c, promotionOne));
+                customerPromotions.add(new CustomerPromotion(new CustomerPromotionId(c.getId(), promotionTwo.getId()), c, promotionTwo));
+            });
+            promotionOne.setCustomerPromotions(customerPromotions);
+            promotionRepository.saveAll(List.of(promotionOne, promotionTwo));
+
+
+            customerRepository.findAll().forEach(c -> System.out.println(c));
 
         };
     }
