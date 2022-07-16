@@ -12,3 +12,16 @@ In old apps, we had to write every sentence manually to communicate to the datab
 
 For Details, check the official [Spring Data JPA Docs](https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#preface)
 
+## Example of implementation
+
+#### DDBB Relational Schema
+[![dbschema.png](https://i.postimg.cc/nzV3gXBb/dbschema.png)](https://postimg.cc/sB8PZDTw)
+
+This is the example of table relations that I chose. It is simple, but enough to implement one relation of every kind.
+
+    - @OneToOne
+    - @OneToMany
+    - @ManyToOne
+    - @ManyToMany
+
+

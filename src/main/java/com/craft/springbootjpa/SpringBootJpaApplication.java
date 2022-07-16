@@ -69,10 +69,16 @@ public class SpringBootJpaApplication {
              * At the same time, we add on cascade, the invoices lines in a ManyToMany direct relationship with products
              */
 
-            Invoice invoice = new Invoice(customer, LocalDateTime.now(), 566.0);
-            invoice.setProducts(products.subList(0, 5).stream().collect(Collectors.toSet()));
-            Invoice invoiceTwo = new Invoice(customer, LocalDateTime.now(), 888.3);
-            invoiceTwo.setProducts(products.subList(6, 10).stream().collect(Collectors.toSet()));
+            Set<Product> productsInvoiceOne = products.subList(0, 5).stream().collect(Collectors.toSet());
+            Invoice invoice = new Invoice(customer, LocalDateTime.now(),
+                    productsInvoiceOne.stream().mapToDouble(Product::getPrice).sum());
+            invoice.setProducts(productsInvoiceOne);
+
+            Set<Product> productsInvoiceTwo = products.subList(6, 10).stream().collect(Collectors.toSet());
+            Invoice invoiceTwo = new Invoice(customer, LocalDateTime.now(),
+                    productsInvoiceTwo.stream().mapToDouble(Product::getPrice).sum());
+            invoiceTwo.setProducts(productsInvoiceTwo);
+
             Set<Invoice> invoices = new HashSet<>();
             invoices.addAll(List.of(invoice, invoiceTwo));
             customer.setInvoices(invoices);
