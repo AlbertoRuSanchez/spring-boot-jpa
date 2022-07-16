@@ -29,6 +29,7 @@ Using this property you can create/update tables and relationships between them 
 `
 spring.jpa.hibernate.ddl-auto=create-drop
 `
+
 `
 spring.jpa.hibernate.ddl-auto=update
 `
@@ -49,7 +50,7 @@ This is the example of table relations that I chose. It is simple, but enough to
 ### Some interesting JPA annotations
 
 #### Cascade
-When you persist and object to database, you can configure it to auto-update the parent. For example, if you create a new customer object that has a relationship to invoice by OneToMany, with cascade you can set a list of invoices to the customer, then save de customer on database, and table invoice will get persisted with those invoices.
+When you persist an object to database, you can configure it to auto-update the children. For example, if you create a new customer object that has a relationship to invoice by OneToMany, with cascade you can set a list of invoices to the customer, then save de customer on database, and table invoice will get persisted with those invoices.
 
 There are several types of cascade configurations, depending on the operation to database that you want it to fire the automation. They must be included in the parent and they are:
 
@@ -82,6 +83,25 @@ EAGER will field the data as soon as the object gets initialized. For example:
 LAZY will field the data just on demand of that data. This is by default in OneToMany or ManyToMany relationships. For example:
 
 `@OneToMany (fetch = FetchType.LAZY)`
+
+## Repository -> CrudRepository -> PageAndSortingRepository -> JpaRepository
+
+You can create so easy, what we call "Repository", just extending from one of these three interfaces.
+
+JpaRepository extends from PageAndSortingRepository and PageAndSortingRepository extends from CrudRepository. That means that JpaRepository contains all methods, obviously, from its fathers. 
+
+- CrudRepository has CRUD methods for a concrete Entity
+- PageAndSortingRepository has CRUD methods + paging and sorting on query methods
+- JpaRepository has both + other methods to complement CRUD operations and query with Lists
+
+I would recommend to use JpaRepository as default, but if you can use just CrudRepository for example if you are sure that you won't need paging or sorting.
+
+
+## Testing your repos
+
+Every non-anemic line of code should be tested, and repositories are included for sure.
+
+To test our repositories we have an annotation in springboot called @DataJpaTest. With it, we can create integration tests so easy. With this annotation, when the test class runs, will wake up a context and create an embedded database. So you can simulate every method from your repo as if it were working in a real database.
 
 
 
