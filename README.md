@@ -10,5 +10,5 @@ Spring Data JPA is a module from Spring framework that helps you to implement in
 
 In old apps, we had to write every sentence manually to communicate to the database, letting to developers all the responsibility to make it clean and coherent but, sadly and frequently, ending in caos.
 
-For Details, check the official [Spring Data JPA Docs] (https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#preface)
+For Details, check the official [Spring Data JPA Docs](https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#preface)
 
