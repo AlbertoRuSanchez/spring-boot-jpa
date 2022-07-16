@@ -28,6 +28,8 @@ Using this property you can create/update tables and relationships between them 
 
 `
 spring.jpa.hibernate.ddl-auto=create-drop
+`
+`
 spring.jpa.hibernate.ddl-auto=update
 `
 
@@ -62,6 +64,8 @@ For example:
 
 `    
 @OneToMany (mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+`
+`
 private Set<Invoice invoices = new HashSet<>();
 `
 
