@@ -17,9 +17,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity(name = "Customer")
@@ -57,7 +55,7 @@ public class Customer {
             cascade = CascadeType.ALL,
             orphanRemoval = true,
             fetch = FetchType.EAGER)
-    private List<Invoice> invoices = new ArrayList<>();
+    private Set<Invoice> invoices = new HashSet<>();
 
     @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER)
     private Set<CustomerPromotion> customerPromotions = new HashSet<>();
@@ -68,4 +66,5 @@ public class Customer {
         this.email = email;
         this.birthDate = birthDate;
     }
+
 }

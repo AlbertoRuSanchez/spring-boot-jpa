@@ -19,9 +19,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity(name = "Invoice")
@@ -41,13 +39,11 @@ public class Invoice {
             strategy = GenerationType.SEQUENCE,
             generator = "invoice_id_sequence"
     )
+    @Column(name = "id", unique = true, nullable = false)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(
-            name = "customer_id",
-            referencedColumnName = "id"
-    )
+    @ManyToOne (fetch = FetchType.LAZY)
+    @JoinColumn(name = "customer_id")
     @ToString.Exclude
     private Customer customer;
 
@@ -57,7 +53,7 @@ public class Invoice {
     @Column(name = "amount")
     private Double amount;
 
-    @ManyToMany (fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @ManyToMany (cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(
             name = "invoice_product",
             joinColumns = @JoinColumn(name = "invoice_id"),
@@ -70,4 +66,10 @@ public class Invoice {
         this.createdAt = createdAt;
         this.amount = amount;
     }
+
+    public Invoice(LocalDateTime createdAt, Double amount) {
+        this.createdAt = createdAt;
+        this.amount = amount;
+    }
+
 }
