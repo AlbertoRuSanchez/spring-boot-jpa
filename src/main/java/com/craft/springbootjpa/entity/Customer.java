@@ -14,7 +14,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -28,18 +27,11 @@ import java.util.Set;
 @ToString
 public class Customer {
     @Id
-    @SequenceGenerator(
-            name = "customer_id_sequence",
-            sequenceName = "customer_id_sequence"
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "customer_id_sequence"
-    )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", updatable = false)
     private Long id;
     @Column (name = "first_name", nullable = false)
-    private String fistName;
+    private String firstName;
     @Column (name = "last_name", nullable = false)
     private String lastName;
     @Column (name = "email", nullable = false, unique = true)
@@ -60,8 +52,8 @@ public class Customer {
     @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER)
     private Set<CustomerPromotion> customerPromotions = new HashSet<>();
 
-    public Customer(String fistName, String lastName, String email, LocalDate birthDate) {
-        this.fistName = fistName;
+    public Customer(String firstName, String lastName, String email, LocalDate birthDate) {
+        this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.birthDate = birthDate;

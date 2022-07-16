@@ -31,14 +31,7 @@ import java.util.Set;
 public class Invoice {
 
     @Id
-    @SequenceGenerator(
-            name = "invoice_id_sequence",
-            sequenceName = "invoice_id_sequence"
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "invoice_id_sequence"
-    )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true, nullable = false)
     private Long id;
 

@@ -25,13 +25,7 @@ import javax.persistence.Table;
 public class UserAccount {
 
     @Id
-    @SequenceGenerator(
-            name = "user_id_sequence",
-            sequenceName = "user_id_sequence"
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "user_id_sequence")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", updatable = false)
     private Long id;
     @Column (name = "user_name")
